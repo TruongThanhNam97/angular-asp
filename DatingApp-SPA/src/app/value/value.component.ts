@@ -7,6 +7,9 @@ import { HttpClient } from "@angular/common/http";
   styleUrls: ["./value.component.css"]
 })
 export class ValueComponent implements OnInit {
+
+  values : {id : number, name : string}[];
+
   constructor(private http: HttpClient) {}
 
   ngOnInit() {
@@ -16,6 +19,6 @@ export class ValueComponent implements OnInit {
   getValues() {
     this.http
       .get("http://localhost:5000/values")
-      .subscribe(v => console.log(v), e => console.log(e));
+      .subscribe((v:any) => this.values = v , e => console.log(e));
   }
 }
