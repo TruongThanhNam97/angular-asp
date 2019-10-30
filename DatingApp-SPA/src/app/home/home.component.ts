@@ -8,18 +8,16 @@ import { HttpClient } from '@angular/common/http';
 })
 export class HomeComponent implements OnInit {
   registerMode = false;
-  
-  constructor(private http : HttpClient) { }
 
-  ngOnInit() {
-  }
+  constructor(private http: HttpClient) {}
+
+  ngOnInit() {}
 
   registerToggle() {
     this.registerMode = true;
   }
 
-  setRegisterMode(mode:boolean) {
+  setRegisterMode(mode: boolean) {
     this.registerMode = mode;
   }
-
 }
