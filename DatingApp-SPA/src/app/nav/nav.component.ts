@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthService } from '../_services/auth.service';
+import { AlertifyService } from '../_services/alertify.service';
 
 @Component({
   selector: 'app-nav',
@@ -9,7 +10,10 @@ import { AuthService } from '../_services/auth.service';
 })
 export class NavComponent implements OnInit {
   signForm: FormGroup;
-  constructor(private authService : AuthService) {}
+  constructor(
+    public authService: AuthService,
+    private alertify: AlertifyService
+  ) {}
   ngOnInit() {
     this.initializeForm();
   }
@@ -20,17 +24,15 @@ export class NavComponent implements OnInit {
     });
   }
   onSubmit() {
-    this.authService.login(this.signForm.value).subscribe(
-      v => console.log('Login successfully'),
-      e => console.log(e)
-    );
+    this.authService
+      .login(this.signForm.value)
+      .subscribe(v => this.alertify.success('Login successfully'), e => this.alertify.error(e));
   }
   loggenIn() {
-    const token = localStorage.getItem('token');
-    return !!token;
+    return this.authService.loggedIn();
   }
   logout() {
     localStorage.removeItem('token');
-    console.log('logged out');
+    this.alertify.message('logged out');
   }
 }
