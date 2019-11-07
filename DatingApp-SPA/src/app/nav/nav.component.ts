@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthService } from '../_services/auth.service';
 import { AlertifyService } from '../_services/alertify.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav',
@@ -12,8 +13,9 @@ export class NavComponent implements OnInit {
   signForm: FormGroup;
   constructor(
     public authService: AuthService,
-    private alertify: AlertifyService
-  ) {}
+    private alertify: AlertifyService,
+    private router: Router
+  ) { }
   ngOnInit() {
     this.initializeForm();
   }
@@ -26,7 +28,10 @@ export class NavComponent implements OnInit {
   onSubmit() {
     this.authService
       .login(this.signForm.value)
-      .subscribe(v => this.alertify.success('Login successfully'), e => this.alertify.error(e));
+      .subscribe(
+        v => this.alertify.success('Login successfully'),
+        e => this.alertify.error(e),
+        () => this.router.navigate(['/members']));
   }
   loggenIn() {
     return this.authService.loggedIn();
@@ -34,5 +39,6 @@ export class NavComponent implements OnInit {
   logout() {
     localStorage.removeItem('token');
     this.alertify.message('logged out');
+    this.router.navigate(['/home']);
   }
 }
