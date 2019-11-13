@@ -92,3 +92,4 @@ C:\Users\ThanhNamTruong\Desktop\angular-asp\DatingApp.API\bin\Debug\netcoreapp3.
 C:\Users\ThanhNamTruong\Desktop\angular-asp\DatingApp.API\bin\Debug\netcoreapp3.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\Users\ThanhNamTruong\Desktop\angular-asp\DatingApp.API\bin\Debug\netcoreapp3.0\Microsoft.IdentityModel.Protocols.dll
 C:\Users\ThanhNamTruong\Desktop\angular-asp\DatingApp.API\bin\Debug\netcoreapp3.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\ThanhNamTruong\Desktop\angular-asp\DatingApp.API\bin\Debug\netcoreapp3.0\Data\UserSeedData.json
