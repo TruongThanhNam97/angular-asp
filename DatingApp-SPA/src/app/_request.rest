@@ -10,8 +10,8 @@ POST http://localhost:5000/auth/login
 Content-Type: application/json
 
 {
-    "username" : "nam@gmail.com",
-    "password" : "29041997"
+    "username" : "roy",
+    "password" : "password"
 }
 
 ###
@@ -23,4 +23,13 @@ Content-Type: application/json
     "username" : "nam3@gmail.com",
     "password" : "29041997"
 }
+
+###
+
+GET http://localhost:5000/users
+Authorization: Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI0IiwidW5pcXVlX25hbWUiOiJyb3kiLCJuYmYiOjE1NzM2MjM2NjIsImV4cCI6MTU3MzcxMDA2MiwiaWF0IjoxNTczNjIzNjYyfQ.HR-DqQ1wt1gTQL5RvioadwyEHsjNwCOVJoVkNiACNR5Hl-WeUeYlFrRmdZOHvvhNNenTtzITucRan5gn-vxGQw
+
+###
+GET http://localhost:5000/users/1
+Authorization: Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI0IiwidW5pcXVlX25hbWUiOiJyb3kiLCJuYmYiOjE1NzM2MjM2NjIsImV4cCI6MTU3MzcxMDA2MiwiaWF0IjoxNTczNjIzNjYyfQ.HR-DqQ1wt1gTQL5RvioadwyEHsjNwCOVJoVkNiACNR5Hl-WeUeYlFrRmdZOHvvhNNenTtzITucRan5gn-vxGQw
 
