@@ -96,3 +96,5 @@ C:\Users\ThanhNamTruong\Desktop\angular-asp\DatingApp.API\bin\Debug\netcoreapp3.
 C:\Users\ThanhNamTruong\Desktop\angular-asp\DatingApp.API\bin\Debug\netcoreapp3.0\Microsoft.AspNetCore.JsonPatch.dll
 C:\Users\ThanhNamTruong\Desktop\angular-asp\DatingApp.API\bin\Debug\netcoreapp3.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
 C:\Users\ThanhNamTruong\Desktop\angular-asp\DatingApp.API\bin\Debug\netcoreapp3.0\Newtonsoft.Json.Bson.dll
+C:\Users\ThanhNamTruong\Desktop\angular-asp\DatingApp.API\bin\Debug\netcoreapp3.0\AutoMapper.dll
+C:\Users\ThanhNamTruong\Desktop\angular-asp\DatingApp.API\bin\Debug\netcoreapp3.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
