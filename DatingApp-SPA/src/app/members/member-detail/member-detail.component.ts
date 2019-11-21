@@ -21,19 +21,15 @@ export class MemberDetailComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.loadUser();
+    this.route.data.pipe(
+      takeUntil(this.destroySubscription$)
+    ).subscribe(data => {
+      this.user = data.user;
+    });
   }
 
   ngOnDestroy() {
     this.destroySubscription$.next(true);
-  }
-
-  loadUser() {
-    this.userService.getUser(+this.route.snapshot.params.id).pipe(
-      takeUntil(this.destroySubscription$)
-    ).subscribe((user: User) => {
-      this.user = user;
-    }, error => this.alertify.error(error));
   }
 
 }

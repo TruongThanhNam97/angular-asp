@@ -4,6 +4,7 @@ import { UserService } from '../../_services/user.service';
 import { AlertifyService } from '../../_services/alertify.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-member-list',
@@ -14,24 +15,21 @@ export class MemberListComponent implements OnInit, OnDestroy {
   users: User[];
   destroySubscription$: Subject<boolean> = new Subject();
 
-  constructor(private userService: UserService, private alertify: AlertifyService) { }
+  constructor(
+    private userService: UserService,
+    private alertify: AlertifyService,
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.loadUsers();
+    this.route.data.pipe(
+      takeUntil(this.destroySubscription$)
+    ).subscribe(data => {
+      this.users = data.users;
+    });
   }
 
   ngOnDestroy() {
     this.destroySubscription$.next(true);
-  }
-
-  loadUsers() {
-    this.userService.getUsers().pipe(
-      takeUntil(this.destroySubscription$),
-    ).subscribe((users: User[]) => {
-      this.users = users;
-    }, error => {
-      this.alertify.error(error);
-    });
   }
 
 }

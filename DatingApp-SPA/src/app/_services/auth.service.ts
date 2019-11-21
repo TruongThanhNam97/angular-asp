@@ -15,22 +15,17 @@ export class AuthService {
   constructor(private http: HttpClient) { }
   login(model: any) {
     return this.http.post(this.baseUrl + 'login', model).pipe(
-      retryWhen(() => fromEvent(window, 'online')),
       tap((response: any) => {
         const user = response;
         if (user) {
           localStorage.setItem('token', user.token);
           this.decodedToken = this.jwtHelper.decodeToken(user.token);
         }
-      }),
-      catchError(error => of(error))
+      })
     );
   }
   register(model: any) {
-    return this.http.post(this.baseUrl + 'register', model).pipe(
-      retryWhen(() => fromEvent(window, 'online')),
-      catchError(error => of(error))
-    );
+    return this.http.post(this.baseUrl + 'register', model);
   }
   loggedIn() {
     const token = localStorage.getItem('token');
