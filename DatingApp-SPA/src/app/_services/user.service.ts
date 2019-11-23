@@ -26,4 +26,8 @@ export class UserService {
       catchError(error => of(error))
     );
   }
+
+  updateUser(id: number, user: User) {
+    return this.http.put(this.baseUrl + 'users/' + id, user);
+  }
 }
