@@ -5,6 +5,7 @@ import { AlertifyService } from 'src/app/_services/alertify.service';
 import { ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { NgxGalleryOptions, NgxGalleryImage, NgxGalleryAnimation } from 'ngx-gallery';
 
 @Component({
   selector: 'app-member-detail',
@@ -13,6 +14,9 @@ import { takeUntil } from 'rxjs/operators';
 })
 export class MemberDetailComponent implements OnInit, OnDestroy {
   user: User;
+  galleryOptions: NgxGalleryOptions[];
+  galleryImages: NgxGalleryImage[];
+
   destroySubscription$: Subject<boolean> = new Subject();
 
   constructor(
@@ -26,10 +30,41 @@ export class MemberDetailComponent implements OnInit, OnDestroy {
     ).subscribe(data => {
       this.user = data.user;
     });
+    this.galleryOptions = [
+      {
+        width: '500px',
+        height: '500px',
+        imagePercent: 100,
+        thumbnailsColumns: 4,
+        imageAnimation: NgxGalleryAnimation.Slide,
+        preview: true,
+        previewFullscreen: true,
+        previewSwipe: true,
+        previewCloseOnClick: true,
+        previewCloseOnEsc: true,
+        previewAnimation: true,
+        previewZoom: true
+      }
+    ];
+    this.galleryImages = this.getImages();
   }
 
   ngOnDestroy() {
     this.destroySubscription$.next(true);
+  }
+
+  getImages() {
+    const imageUrls = [];
+    this.user.photos.forEach(photo => {
+      imageUrls.push({
+        small: photo.url,
+        medium: photo.url,
+        big: photo.url,
+        description: photo.description
+      });
+    });
+
+    return imageUrls;
   }
 
 }
