@@ -51,7 +51,7 @@ namespace DatingApp.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddPhotoForUser(int userId, PhotoForCreationDto photoForCreationDto)
+        public async Task<IActionResult> AddPhotoForUser(int userId, [FromForm]PhotoForCreationDto photoForCreationDto)
         {
             if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
@@ -68,8 +68,7 @@ namespace DatingApp.API.Controllers
                 {
                     var uploadParam = new ImageUploadParams()
                     {
-                        File = new FileDescription(file.Name, stream),
-                        Transformation = new Transformation().Width(500).Height(500).Crop("fill").Gravity("face")
+                        File = new FileDescription(file.Name, stream)
                     };
 
                     uploadResult = _cloudinary.Upload(uploadParam);
@@ -91,7 +90,7 @@ namespace DatingApp.API.Controllers
             if (await _repo.SaveAll())
             {
                 var photoToReturn = _mapper.Map<PhotoForReturnDto>(photo);
-                return CreatedAtRoute("GetPhoto", new { id = photo.Id }, photoToReturn);
+                return CreatedAtRoute("GetPhoto", new { userId, id = photo.Id }, photoToReturn);
             }
 
             return BadRequest("Could not add the photo");

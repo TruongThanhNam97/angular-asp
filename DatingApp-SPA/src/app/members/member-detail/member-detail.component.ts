@@ -36,11 +36,10 @@ export class MemberDetailComponent implements OnInit, OnDestroy {
         height: '500px',
         imagePercent: 100,
         thumbnailsColumns: 4,
-        imageAnimation: NgxGalleryAnimation.Slide,
+        imageAnimation: NgxGalleryAnimation.Zoom,
         preview: true,
         previewFullscreen: true,
         previewSwipe: true,
-        previewCloseOnClick: true,
         previewCloseOnEsc: true,
         previewAnimation: true,
         previewZoom: true

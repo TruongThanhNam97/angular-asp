@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\ThanhNamTruong\\Desktop\\angular-asp\\DatingApp.API\\DatingApp.API.csproj": {}
+    "C:\\Users\\ThanhNamTruong\\Desktop\\angular-asp\\DatingApp.API\\DatingApp.API.csproj": {}
   },
   "projects": {
-    "c:\\Users\\ThanhNamTruong\\Desktop\\angular-asp\\DatingApp.API\\DatingApp.API.csproj": {
+    "C:\\Users\\ThanhNamTruong\\Desktop\\angular-asp\\DatingApp.API\\DatingApp.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\ThanhNamTruong\\Desktop\\angular-asp\\DatingApp.API\\DatingApp.API.csproj",
+        "projectUniqueName": "C:\\Users\\ThanhNamTruong\\Desktop\\angular-asp\\DatingApp.API\\DatingApp.API.csproj",
         "projectName": "DatingApp.API",
-        "projectPath": "c:\\Users\\ThanhNamTruong\\Desktop\\angular-asp\\DatingApp.API\\DatingApp.API.csproj",
+        "projectPath": "C:\\Users\\ThanhNamTruong\\Desktop\\angular-asp\\DatingApp.API\\DatingApp.API.csproj",
         "packagesPath": "C:\\Users\\ThanhNamTruong\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\ThanhNamTruong\\Desktop\\angular-asp\\DatingApp.API\\obj\\",
+        "outputPath": "C:\\Users\\ThanhNamTruong\\Desktop\\angular-asp\\DatingApp.API\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
