@@ -14,6 +14,7 @@ import { takeUntil } from 'rxjs/operators';
 export class NavComponent implements OnInit, OnDestroy {
   signForm: FormGroup;
   destroySubscription$: Subject<boolean> = new Subject();
+  photoUrl: string;
   constructor(
     public authService: AuthService,
     private alertify: AlertifyService,
@@ -21,6 +22,7 @@ export class NavComponent implements OnInit, OnDestroy {
   ) { }
   ngOnInit() {
     this.initializeForm();
+    this.authService.currentPhotoUrl$.subscribe(photoUrl => this.photoUrl = photoUrl);
   }
   ngOnDestroy() {
     this.destroySubscription$.next(true);
@@ -47,6 +49,9 @@ export class NavComponent implements OnInit, OnDestroy {
   }
   logout() {
     localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    this.authService.decodedToken = null;
+    this.authService.currentUser = null;
     this.alertify.message('logged out');
     this.router.navigate(['/home']);
   }
