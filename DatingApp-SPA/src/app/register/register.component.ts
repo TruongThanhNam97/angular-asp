@@ -1,9 +1,10 @@
 import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { AuthService } from '../_services/auth.service';
 import { AlertifyService } from '../_services/alertify.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { BsDatepickerConfig } from 'ngx-bootstrap';
 
 @Component({
   selector: 'app-register',
@@ -14,21 +15,41 @@ export class RegisterComponent implements OnInit, OnDestroy {
   signForm: FormGroup;
   destroySubscription$: Subject<boolean> = new Subject();
   @Output() cancelRegister = new EventEmitter();
+  bsConfig: Partial<BsDatepickerConfig>;
 
   constructor(
     private authService: AuthService,
-    private alertify: AlertifyService
+    private alertify: AlertifyService,
+    private fb: FormBuilder
   ) { }
 
   ngOnInit() {
-    this.signForm = new FormGroup({
-      username: new FormControl(null, [Validators.required]),
-      password: new FormControl(null, [
-        Validators.required,
-        Validators.minLength(4),
-        Validators.maxLength(8)
-      ])
-    });
+    this.configDatepicker();
+    this.initForm();
+  }
+
+  configDatepicker(): void {
+    this.bsConfig = {
+      containerClass: 'theme-red',
+      dateInputFormat: 'DD-MM-YYYY'
+    };
+  }
+
+  initForm(): void {
+    this.signForm = this.fb.group({
+      gender: ['male'],
+      username: [null, [Validators.required]],
+      knownAs: [null, [Validators.required]],
+      dateOfBirth: [null, [Validators.required]],
+      city: [null, [Validators.required]],
+      country: [null, [Validators.required]],
+      password: [null, [Validators.required, Validators.minLength(4), Validators.maxLength(8)]],
+      confirmPassword: [null, [Validators.required]]
+    }, { validators: [this.passwordMatchValidator] });
+  }
+
+  passwordMatchValidator(g: FormGroup) {
+    return g.get('password').value === g.get('confirmPassword').value ? null : { mismatch: true };
   }
 
   ngOnDestroy() {

@@ -1,39 +1,82 @@
 <form [formGroup]="signForm" (submit)="register()">
   <h2 class="text-center text-primary">Sign Up</h2>
   <hr />
+
   <div class="form-group">
-    <input
-      type="text"
-      class="form-control"
-      placeholder="Username"
-      formControlName="username"
-      [ngClass]="{'is-invalid': signForm.get('username').touched && signForm.get('username').invalid }"
-    />
-    <span class="invalid-feedback" *ngIf="signForm.get('username').touched && signForm.get('username').invalid">
-      <span *ngIf="signForm.get('username').errors['required']">Username is required</span>
+    <label class="control-label" style="margin-right:10px">I am a: </label>
+    <label class="radio-inline">
+      <input class="mr-3" type="radio" value="male" formControlName="gender">Male
+    </label>
+    <label class="radio-inline ml-3">
+      <input class="mr-3" type="radio" value="female" formControlName="gender">Female
+    </label>
+  </div>
+
+  <div class="form-group">
+    <input [ngClass]="{'is-invalid': signForm.get('knownAs')?.invalid && signForm.get('knownAs')?.touched}"
+      class="form-control" placeholder="Known as" formControlName="knownAs">
+    <div class="invalid-feedback"
+      *ngIf="signForm.get('knownAs')?.touched && signForm.get('knownAs')?.hasError('required')">Known as is
+      required</div>
+  </div>
+
+  <div class="form-group">
+    <input [ngClass]="{'is-invalid': signForm.get('dateOfBirth')?.invalid && signForm.get('dateOfBirth')?.touched}"
+      class="form-control" placeholder="Date of Birth" formControlName="dateOfBirth" type="text" bsDatepicker
+      [bsConfig]="bsConfig">
+    <div class="invalid-feedback"
+      *ngIf="signForm.get('dateOfBirth')?.touched && signForm.get('dateOfBirth')?.hasError('required')">Date of
+      Birth is required</div>
+  </div>
+
+  <div class="form-group">
+    <input [ngClass]="{'is-invalid': signForm.get('city')?.invalid && signForm.get('city')?.touched}"
+      class="form-control" placeholder="City" formControlName="city">
+    <div class="invalid-feedback" *ngIf="signForm.get('city')?.touched && signForm.get('city')?.hasError('required')">
+      City is required</div>
+  </div>
+
+  <div class="form-group">
+    <input [ngClass]="{'is-invalid': signForm.get('country')?.invalid && signForm.get('country')?.touched}"
+      class="form-control" placeholder="Country" formControlName="country">
+    <div class="invalid-feedback"
+      *ngIf="signForm.get('country')?.touched && signForm.get('country')?.hasError('required')">Country is
+      required</div>
+  </div>
+
+  <div class="form-group">
+    <input type="text" class="form-control" placeholder="Username" formControlName="username"
+      [ngClass]="{'is-invalid': signForm.get('username')?.touched && signForm.get('username')?.invalid }" />
+    <span class="invalid-feedback"
+      *ngIf="signForm.get('username')?.touched && signForm.get('username')?.hasError('required')">Please choose a
+      username
     </span>
   </div>
   <div class="form-group">
-    <input
-      type="password"
-      class="form-control"
-      placeholder="Password"
-      formControlName="password"
-      [ngClass]="{'is-invalid': signForm.get('password').touched && signForm.get('password').invalid }"
-    />
-    <span class="invalid-feedback" *ngIf="signForm.get('password').touched && signForm.get('password').invalid">
-      <span *ngIf="signForm.get('password').errors['required']">Password is required</span>
-      <span *ngIf="signForm.get('password').errors['minlength'] || signForm.get('password').errors['maxlength']">
-        You must specify password betwwen 4 and 8 characters
-      </span>
-    </span>
+    <input type="password" class="form-control" placeholder="Password" formControlName="password"
+      [ngClass]="{'is-invalid': signForm.get('password')?.touched && signForm.get('password')?.invalid }" />
+    <span class="invalid-feedback"
+      *ngIf="signForm.get('password')?.touched && signForm.get('password').hasError('required')">Password is
+      required</span>
+    <span class="invalid-feedback" *ngIf="signForm.get('password')?.touched && 
+      signForm.get('password').hasError('minlength')">Password must be at
+      least 4 characters</span>
+    <span class="invalid-feedback"
+      *ngIf="signForm.get('password')?.touched && signForm.get('password').hasError('maxlength')">Password cannot exceed
+      8 characters</span>
+  </div>
+  <div class="form-group">
+    <input type="password" class="form-control" placeholder="Confirm Password" formControlName="confirmPassword"
+      [ngClass]="{'is-invalid': signForm.get('confirmPassword')?.touched && signForm.get('confirmPassword')?.invalid || 
+      signForm.get('confirmPassword')?.touched && signForm?.hasError('mismatch') }" />
+    <span class="invalid-feedback"
+      *ngIf="signForm.get('confirmPassword')?.touched && signForm.get('confirmPassword')?.hasError('required')">Confirm
+      password is required</span>
+    <span class="invalid-feedback"
+      *ngIf="signForm.get('confirmPassword')?.touched && signForm?.hasError('mismatch')">Password must match</span>
   </div>
   <div class="form-group text-center">
-    <button
-      class="btn btn-success"
-      type="submit"
-      [disabled]="signForm.invalid || signForm.status !== 'VALID'"
-    >
+    <button class="btn btn-success" type="submit" [disabled]="signForm.invalid || signForm.status !== 'VALID'">
       Register
     </button>
     <button class="btn btn-default" type="button" (click)="cancel()">
