@@ -32,13 +32,13 @@ export class AuthService {
           localStorage.setItem('user', JSON.stringify(user.user));
           this.decodedToken = this.jwtHelper.decodeToken(user.token);
           this.currentUser = user.user;
-          this.changeMemberPhoto(this.currentUser.photoUrl);
+          this.changeMemberPhoto(this.currentUser.photoUrl ? this.currentUser.photoUrl : '../../assets/user.png');
         }
       })
     );
   }
-  register(model: any) {
-    return this.http.post(this.baseUrl + 'register', model);
+  register(user: User) {
+    return this.http.post(this.baseUrl + 'register', user);
   }
   loggedIn() {
     const token = localStorage.getItem('token');

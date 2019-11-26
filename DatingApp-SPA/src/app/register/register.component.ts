@@ -5,6 +5,7 @@ import { AlertifyService } from '../_services/alertify.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { BsDatepickerConfig } from 'ngx-bootstrap';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -20,7 +21,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
   constructor(
     private authService: AuthService,
     private alertify: AlertifyService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -57,15 +59,26 @@ export class RegisterComponent implements OnInit, OnDestroy {
   }
 
   register() {
-    this.authService
-      .register(this.signForm.value)
-      .pipe(
-        takeUntil(this.destroySubscription$)
-      )
-      .subscribe(
-        v => this.alertify.success('Resgister successfully'),
-        e => this.alertify.error(e)
-      );
+    if (this.signForm.valid) {
+      this.authService
+        .register(this.signForm.value)
+        .pipe(
+          takeUntil(this.destroySubscription$)
+        )
+        .subscribe(
+          v => {
+            this.alertify.success('Resgister successfully');
+          },
+          e => this.alertify.error(e),
+          () => {
+            this.authService.login(this.signForm.value).pipe(
+              takeUntil(this.destroySubscription$)
+            ).subscribe(() => {
+              this.router.navigate(['/members']);
+            });
+          }
+        );
+    }
   }
 
   cancel() {
