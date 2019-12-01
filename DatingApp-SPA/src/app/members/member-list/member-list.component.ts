@@ -52,7 +52,8 @@ export class MemberListComponent implements OnInit, OnDestroy {
 
   loadUsers() {
     this.userService
-      .getUsers(this.pagination.currentPage, this.pagination.itemsPerPage, this.userParams).pipe(
+      .getUsers(this.pagination.currentPage, this.pagination.itemsPerPage, this.userParams)
+      .pipe(
         takeUntil(this.destroySubscription$)
       ).subscribe((res: PaginatedResult<User[]>) => {
         this.users = res.result;
