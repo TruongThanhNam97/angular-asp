@@ -7,6 +7,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { NgxGalleryOptions, NgxGalleryImage, NgxGalleryAnimation } from 'ngx-gallery';
 import { TabsetComponent } from 'ngx-bootstrap';
+import { AuthService } from 'src/app/_services/auth.service';
 
 @Component({
   selector: 'app-member-detail',
@@ -24,7 +25,8 @@ export class MemberDetailComponent implements OnInit, OnDestroy {
   constructor(
     private userService: UserService,
     private alertify: AlertifyService,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private authService: AuthService) { }
 
   ngOnInit() {
     this.route.data.pipe(
@@ -74,6 +76,16 @@ export class MemberDetailComponent implements OnInit, OnDestroy {
 
   selectTab(tabId: number) {
     this.memberTabs.tabs[tabId].active = true;
+  }
+
+  sendLike(id: number) {
+    this.userService.sendLike(this.authService.decodedToken.nameid, id).pipe(
+      takeUntil(this.destroySubscription$)
+    ).subscribe(data => {
+      this.alertify.success('You have liked: ' + this.user.knownAs);
+    }, error => {
+      this.alertify.error(error);
+    });
   }
 
 }
