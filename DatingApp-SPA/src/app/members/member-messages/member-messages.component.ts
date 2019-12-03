@@ -14,6 +14,7 @@ import { takeUntil } from 'rxjs/operators';
 export class MemberMessagesComponent implements OnInit {
   @Input() recipientId: number;
   messages: Message[];
+  newMessage: any = {};
   destroySubscription$: Subject<boolean> = new Subject<boolean>();
 
   constructor(
@@ -29,6 +30,16 @@ export class MemberMessagesComponent implements OnInit {
     this.userServicce.getMessageThread(this.authService.decodedToken.nameid, this.recipientId)
       .pipe(takeUntil(this.destroySubscription$))
       .subscribe(messages => { this.messages = messages; }, error => this.alertify.error(error));
+  }
+
+  sendMessage() {
+    this.newMessage.recipientId = this.recipientId;
+    this.userServicce.sendMessage(this.authService.decodedToken.nameid, this.newMessage)
+      .pipe(takeUntil(this.destroySubscription$))
+      .subscribe((message: Message) => {
+        this.messages.unshift(message);
+        this.newMessage.content = '';
+      }, error => this.alertify.error(error));
   }
 
 }
