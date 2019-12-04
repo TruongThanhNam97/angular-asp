@@ -5,7 +5,7 @@ import { AlertifyService } from 'src/app/_services/alertify.service';
 import { ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { NgxGalleryOptions, NgxGalleryImage, NgxGalleryAnimation } from 'ngx-gallery';
+import { NgxGalleryOptions, NgxGalleryImage, NgxGalleryAnimation, NgxGalleryImageSize } from 'ngx-gallery';
 import { TabsetComponent } from 'ngx-bootstrap';
 import { AuthService } from 'src/app/_services/auth.service';
 
@@ -43,14 +43,18 @@ export class MemberDetailComponent implements OnInit, OnDestroy {
         width: '500px',
         height: '500px',
         imagePercent: 100,
-        thumbnailsColumns: 4,
-        imageAnimation: NgxGalleryAnimation.Zoom,
+        thumbnailsColumns: 5,
+        imageAnimation: NgxGalleryAnimation.Fade,
         preview: true,
         previewFullscreen: true,
         previewSwipe: true,
         previewCloseOnEsc: true,
-        previewAnimation: true,
-        previewZoom: true
+        previewAnimation: false,
+        previewZoom: true,
+        imageSize: NgxGalleryImageSize.Cover,
+        previewKeyboardNavigation: true,
+        previewRotate: true,
+        previewDownload: true
       }
     ];
     this.galleryImages = this.getImages();
