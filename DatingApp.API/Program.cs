@@ -11,6 +11,7 @@ namespace DatingApp.API
 {
     public class Program
     {
+        // When run application, this function is involved first
         public static void Main(string[] args)
         {
             CreateHostBuilder(args).Build().Run();

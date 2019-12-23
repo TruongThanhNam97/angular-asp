@@ -6,13 +6,17 @@
   <form class="form-inline" #form="ngForm" (ngSubmit)="loadUsers()" novalidate>
     <div class="form-group">
       <label for="minAge">Age From</label>
-      <input [(ngModel)]="userParams.minAge" type="number" class="form-control ml-1" style="width: 70px" id="minAge"
+      <input onpaste="return false;"
+        onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57"
+        [(ngModel)]="userParams.minAge" type="number" class="form-control ml-1" style="width: 70px" id="minAge"
         name="minAge">
     </div>
 
     <div class="form-group px-2">
       <label for="maxAge">Age To</label>
-      <input [(ngModel)]="userParams.maxAge" type="number" class="form-control ml-1" style="width: 70px" id="maxAge"
+      <input onpaste="return false;"
+        onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57"
+        [(ngModel)]="userParams.maxAge" type="number" class="form-control ml-1" style="width: 70px" id="maxAge"
         name="maxAge">
     </div>
 

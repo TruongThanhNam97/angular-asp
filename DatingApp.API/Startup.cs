@@ -34,6 +34,9 @@ namespace DatingApp.API
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
+        // Make available dependencies injection and certain libraries to other classes inside application
+        // Can inject them into other classes inside application
+        // Can do all of this by using this configureServices
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<DataContext>(x =>
